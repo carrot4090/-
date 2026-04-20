@@ -100,6 +100,102 @@ def check_valves():
         res = "ВЕРДИКТ: Арматура в рабочем состоянии!\nСОВЕТ: Смажьте шток графитовой смазкой для предотвращения коррозии."
         messagebox.showinfo("Результат диагностики Арматуры", res)
 
+def check_well():
+    """Функция диагностики Артезианской скважины"""
+    q1 = messagebox.askyesno("Диагностика Скважины", "Снизился дебит (стало меньше воды)?")
+    q2 = messagebox.askyesno("Диагностика Скважины", "В воде появился песок или мутность?")
+    q3 = messagebox.askyesno("Диагностика Скважины", "Динамический уровень воды упал ниже насоса?")
+
+    if q3:
+        res = "ВЕРДИКТ: Критическое падение уровня!\nСОВЕТ: Срочно опустите насос ниже или ограничьте забор воды."
+        messagebox.showerror("Результат диагностики Скважины", res)
+    elif q1 or q2:
+        res = "ВЕРДИКТ: Заиление или износ фильтра скважины.\nСОВЕТ: Рекомендуется промывка (эрлифт) или желонирование скважины."
+        messagebox.showwarning("Результат диагностики Скважины", res)
+    else:
+        res = "ВЕРДИКТ: Скважина работает стабильно.\nСОВЕТ: Раз в год проводите замер статического уровня."
+        messagebox.showinfo("Результат диагностики Скважины", res)
+
+def check_rchv():
+    """Функция диагностики Резервуара Чистой Воды (РЧВ)"""
+    q1 = messagebox.askyesno("Диагностика РЧВ", "Нарушена герметичность люков или вентиляции?")
+    q2 = messagebox.askyesno("Диагностика РЧВ", "В резервуаре появился осадок или налет?")
+    q3 = messagebox.askyesno("Диагностика РЧВ", "Стенки имеют трещины или протечки?")
+
+    if q3:
+        res = "ВЕРДИКТ: Утечка ресурса!\nСОВЕТ: Опорожните резервуар и проведите гидроизоляцию швов."
+        messagebox.showerror("Результат диагностики РЧВ", res)
+    elif q1 or q2:
+        res = "ВЕРДИКТ: Риск загрязнения воды.\nСОВЕТ: Проведите чистку и дезинфекцию хлорным раствором."
+        messagebox.showwarning("Результат диагностики РЧВ", res)
+    else:
+        res = "ВЕРДИКТ: Резервуар в норме.\nСОВЕТ: Следите за исправностью поплавковых клапанов."
+        messagebox.showinfo("Результат диагностики РЧВ", res)
+
+def check_meter():
+    """Функция диагностики Водомерного узла"""
+    q1 = messagebox.askyesno("Диагностика Учета", "Счетчик запотел или внутри вода?")
+    q2 = messagebox.askyesno("Диагностика Учета", "Истек срок государственной поверки?")
+    q3 = messagebox.askyesno("Диагностика Учета", "Сорваны или повреждены пломбы?")
+
+    if q3:
+        res = "ВЕРДИКТ: Нарушение учета!\nСОВЕТ: Срочно вызовите инспектора для перепломбировки."
+        messagebox.showerror("Результат диагностики Учета", res)
+    elif q1 or q2:
+        res = "ВЕРДИКТ: Прибор неисправен или нелегитимен.\nСОВЕТ: Замените счетчик или сдайте его в поверку."
+        messagebox.showwarning("Результат диагностики Учета", res)
+    else:
+        res = "ВЕРДИКТ: Узел учета исправен.\nСОВЕТ: Снимайте показания в строго установленные сроки."
+        messagebox.showinfo("Результат диагностики Учета", res)
+
+def check_hydrant():
+    """Функция диагностики Пожарного гидранта"""
+    q1 = messagebox.askyesno("Диагностика ПГ", "Стенд гидранта заполнен водой (не работает слив)?")
+    q2 = messagebox.askyesno("Диагностика ПГ", "Квадрат штока стерт или поврежден?")
+    q3 = messagebox.askyesno("Диагностика ПГ", "Подъезд к гидранту заблокирован?")
+
+    if q2:
+        res = "ВЕРДИКТ: Гидрант неработоспособен!\nСОВЕТ: Требуется замена головки или всего гидранта."
+        messagebox.showerror("Результат диагностики ПГ", res)
+    elif q1 or q3:
+        res = "ВЕРДИКТ: Нарушение правил эксплуатации.\nСОВЕТ: Очистите дренаж и обеспечьте беспрепятственный доступ."
+        messagebox.showwarning("Результат диагностики ПГ", res)
+    else:
+        res = "ВЕРДИКТ: Гидрант исправен.\nСОВЕТ: Проводите проверку на водоотдачу дважды в год."
+        messagebox.showinfo("Результат диагностики ПГ", res)
+
+def check_chamber():
+    """Функция диагностики Колодца (камеры)"""
+    q1 = messagebox.askyesno("Диагностика Колодца", "Плита перекрытия разрушена или сдвинута?")
+    q2 = messagebox.askyesno("Диагностика Колодца", "В колодце скопился мусор или грунт?")
+    q3 = messagebox.askyesno("Диагностика Колодца", "Лестница (скобы) заржавела и шатается?")
+
+    if q1 or q3:
+        res = "ВЕРДИКТ: Опасно для жизни персонала!\nСОВЕТ: Замените плиту и лестницу перед спуском внутрь."
+        messagebox.showerror("Результат диагностики Колодца", res)
+    elif q2:
+        res = "ВЕРДИКТ: Колодец засорен.\nСОВЕТ: Организуйте очистку камеры от посторонних предметов."
+        messagebox.showwarning("Результат диагностики Колодца", res)
+    else:
+        res = "ВЕРДИКТ: Состояние колодца удовлетворительное.\nСОВЕТ: Проверьте наличие крышки люка."
+        messagebox.showinfo("Результат диагностики Колодца", res)
+
+def check_filter():
+    """Функция диагностики Системы фильтрации"""
+    q1 = messagebox.askyesno("Диагностика Фильтров", "Давление на выходе упало?")
+    q2 = messagebox.askyesno("Диагностика Фильтров", "Вода на выходе пахнет или изменила цвет?")
+    q3 = messagebox.askyesno("Диагностика Фильтров", "Автоматика промывки выдает ошибку?")
+
+    if q3:
+        res = "ВЕРДИКТ: Сбой системы управления.\nСОВЕТ: Перезагрузите контроллер или замените управляющий клапан."
+        messagebox.showerror("Результат диагностики Фильтров", res)
+    elif q1 or q2:
+        res = "ВЕРДИКТ: Истощение ресурса загрузки.\nСОВЕТ: Проведите принудительную промывку или замените фильтрующий сорбент."
+        messagebox.showwarning("Результат диагностики Фильтров", res)
+    else:
+        res = "ВЕРДИКТ: Система очистки работает штатно.\nСОВЕТ: Следите за уровнем реагентов в баках."
+        messagebox.showinfo("Результат диагностики Фильтров", res)
+
 
 def check_panel():
     """Функция диагностики Электрощита"""
@@ -126,64 +222,94 @@ def open_presentation():
         # Если файла нет в папке с программой, выводим ошибку
         messagebox.showerror("Ошибка", "Файл 'проект.pptx' не найден в папке с программой!")
 
+def calc_repair():
+    """Функция калькулятора стоимости ремонта"""
+    # Создаем новое окно поверх основного
+    calc_window = tk.Toplevel(root)
+    calc_window.title("Калькулятор ремонта")
+    calc_window.geometry("300x250")
 
-# ГРАФИЧЕСКИЙ ИНТЕРФЕЙС
+    # Устанавливаем иконку именно для этого окна
+    try:
+        # Можно использовать ту же иконку или другую, например 'calc.ico'
+        calc_window.iconbitmap("calc.ico")
+    except:
+        # Если иконки нет, окно просто откроется со стандартным значком
+        pass
+
+    tk.Label(calc_window, text="Введите количество часов работы:").pack(pady=5)
+    entry_trips = tk.Entry(calc_window)
+    entry_trips.pack()
+
+    tk.Label(calc_window, text="Стоимость часа (руб):").pack(pady=5)
+    entry_price = tk.Entry(calc_window)
+    entry_price.pack()
+
+    def calculate():
+        try:
+            # Считаем итог
+            res = float(entry_trips.get()) * float(entry_price.get())
+            messagebox.showinfo("Расчет", f"Ориентировочная стоимость: {res} руб.")
+        except ValueError:
+            messagebox.showerror("Ошибка", "Пожалуйста, вводите только числа!")
+
+    tk.Button(calc_window, text="Рассчитать итог", command=calculate, bg="lightgreen").pack(pady=15)
 
 
-# Создаем объект основного окна
+
+
+
+
+
+# РАЗДЕЛ 2: ГРАФИЧЕСКИЙ ИНТЕРФЕЙС (GUI)
+
 root = tk.Tk()
-root.title("Water Equipment Diagnostics") # Заголовок ярлыка в панели задач
-root.geometry("450x500") # Размеры окна
-
+root.title("Water Equipment Diagnostics")
+root.geometry("620x800")
 
 try:
     root.iconbitmap("my_icon.ico")
 except:
-    # Если файла нет, программа запустится без ошибки со стандартным значком (перышко)
     pass
 
-# Визуальные элементы
-label_title = tk.Label(
-    root,
-    text="ВЫБИРЕТЕ ФУНКЦИЮ",
-    font=("Arial", 14, "bold"),
-    pady=20
-)
-label_title.pack()
+# Самая верхняя надпись
+label_top = tk.Label(root, text="ВЫБЕРИТЕ ФУНКЦИЮ", font=("Arial", 12, "bold"), fg="blue", pady=5)
+label_top.pack()
 
-# Кнопка для ВБР
-btn_vbr = tk.Button(root, text="Диагностика ВБР", width=30, height=1, command=check_vbr)
-btn_vbr.pack(pady=3)
+# ОСНОВНОЙ ЗАГОЛОВОК ДИАГНОСТИКИ
+label_diag = tk.Label(root, text="ДИАГНОСТИКА ОБОРУДОВАНИЯ", font=("Arial", 14, "bold"), pady=10)
+label_diag.pack()
 
-# Кнопка для ВНС
-btn_vns = tk.Button(root, text="Диагностика ВНС", width=30, height=1, command=check_vns)
-btn_vns.pack(pady=3)
+# Контейнер для кнопок диагностики (СЕТКА)
+frame_diag = tk.Frame(root)
+frame_diag.pack(pady=5)
 
-# Кнопка для ТП
-btn_tp = tk.Button(root, text="Соответствие ТП", width=30, height=1, command=check_tp)
-btn_tp.pack(pady=3)
+# --- ЛЕВАЯ КОЛОНКА ---
+tk.Button(frame_diag, text="Диагностика ВБР", width=25, height=2, command=check_vbr).grid(row=0, column=0, padx=10, pady=5)
+tk.Button(frame_diag, text="Диагностика ВНС", width=25, height=2, command=check_vns).grid(row=1, column=0, padx=10, pady=5)
+tk.Button(frame_diag, text="Соответствие ТП", width=25, height=2, command=check_tp).grid(row=2, column=0, padx=10, pady=5)
+tk.Button(frame_diag, text="Диагностика Сетей", width=25, height=2, command=check_pipes).grid(row=3, column=0, padx=10, pady=5)
+tk.Button(frame_diag, text="Запорная Арматура", width=25, height=2, command=check_valves).grid(row=4, column=0, padx=10, pady=5)
+tk.Button(frame_diag, text="Электрощитовая", width=25, height=2, command=check_panel).grid(row=5, column=0, padx=10, pady=5)
 
-# Кнопка для Сетей
-btn_pipes = tk.Button(root, text="Диагностика Сетей", width=30, height=1, command=check_pipes)
-btn_pipes.pack(pady=3)
+# --- ПРАВАЯ КОЛОНКА ---
+tk.Button(frame_diag, text="Артскважина", width=25, height=2, command=check_well).grid(row=0, column=1, padx=10, pady=5)
+tk.Button(frame_diag, text="Резервуар РЧВ", width=25, height=2, command=check_rchv).grid(row=1, column=1, padx=10, pady=5)
+tk.Button(frame_diag, text="Водомерный узел", width=25, height=2, command=check_meter).grid(row=2, column=1, padx=10, pady=5)
+tk.Button(frame_diag, text="Пожарный гидрант", width=25, height=2, command=check_hydrant).grid(row=3, column=1, padx=10, pady=5)
+tk.Button(frame_diag, text="Водопроводный колодец", width=25, height=2, command=check_chamber).grid(row=4, column=1, padx=10, pady=5)
+tk.Button(frame_diag, text="Система фильтрации", width=25, height=2, command=check_filter).grid(row=5, column=1, padx=10, pady=5)
 
-# Кнопка для Арматуры
-btn_valves = tk.Button(root, text="Запорная Арматура", width=30, height=1, command=check_valves)
-btn_valves.pack(pady=3)
+# --- ОТДЕЛЬНЫЙ ЗАГОЛОВОК ДЛЯ ПРОЧИХ ФУНКЦИЙ ---
+label_other = tk.Label(root, text="ПРОЧИЕ ФУНКЦИИ", font=("Arial", 12, "bold"), fg="black", pady=15)
+label_other.pack()
 
-# Кнопка для Щитов
-btn_panel = tk.Button(root, text="Электрощитовая", width=30, height=1, command=check_panel)
-btn_panel.pack(pady=3)
+# Блок сервисных кнопок
+frame_service = tk.Frame(root)
+frame_service.pack(pady=5)
 
-# Кнопка выхода
-btn_exit = tk.Button(root, text="ВЫХОД", command=root.quit, fg="red", font=("Arial", 10, "bold"))
-btn_exit.pack(pady=20)
-
-# Кнопка для открытия презентации
-btn_ppt = tk.Button(root, text="Открыть презентацию", width=40, height=1, command=open_presentation, fg="orange" )
-btn_ppt.pack(pady=3)
-
-
+tk.Button(frame_service, text="КАЛЬКУЛЯТОР РЕМОНТА", width=54, height=1, command=calc_repair, font=("Arial", 10, "bold")).pack(pady=3)
+tk.Button(frame_service, text="ОТКРЫТЬ ПРЕЗЕНТАЦИЮ", width=54, height=1, command=open_presentation, font=("Arial", 10, "bold")).pack(pady=3)
+tk.Button(frame_service, text="ВЫХОД", width=54, height=1, command=root.quit, font=("Arial", 10, "bold"), fg="red").pack(pady=10)
 
 root.mainloop()
-
