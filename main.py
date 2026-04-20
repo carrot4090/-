@@ -1,9 +1,14 @@
+
+
 """
 Программа для диагностики систем водоснабжения
 """
 
+
 import tkinter as tk
 from tkinter import messagebox
+import os
+
 
 
 #ФУНКЦИИ ДИАГНОСТИКИ (ЛОГИКА ПРОВЕРКИ)
@@ -112,6 +117,15 @@ def check_panel():
         res = "ВЕРДИКТ: Электрощит работает штатно!\nСОВЕТ: Проверьте отсутствие пыли и влаги внутри корпуса."
         messagebox.showinfo("Результат диагностики Щита", res)
 
+def open_presentation():
+    """Функция для открытия презентации лер.pptx"""
+    try:
+        # Пытаемся открыть файл стандартной программой Windows
+        os.startfile("проект.pptx")
+    except FileNotFoundError:
+        # Если файла нет в папке с программой, выводим ошибку
+        messagebox.showerror("Ошибка", "Файл 'проект.pptx' не найден в папке с программой!")
+
 
 # ГРАФИЧЕСКИЙ ИНТЕРФЕЙС
 
@@ -131,7 +145,7 @@ except:
 # Визуальные элементы
 label_title = tk.Label(
     root,
-    text="ДИАГНОСТИКА ОБОРУДОВАНИЯ",
+    text="ВЫБИРЕТЕ ФУНКЦИЮ",
     font=("Arial", 14, "bold"),
     pady=20
 )
@@ -165,5 +179,11 @@ btn_panel.pack(pady=3)
 btn_exit = tk.Button(root, text="ВЫХОД", command=root.quit, fg="red", font=("Arial", 10, "bold"))
 btn_exit.pack(pady=20)
 
+# Кнопка для открытия презентации
+btn_ppt = tk.Button(root, text="Открыть презентацию", width=40, height=1, command=open_presentation, fg="orange" )
+btn_ppt.pack(pady=3)
+
+
 
 root.mainloop()
+
